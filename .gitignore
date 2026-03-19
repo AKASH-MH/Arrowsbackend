@@ -6,7 +6,7 @@
 .idea/
 .vscode/
 *.iml
-
+.m2/
 # Maven
 target/
 .mvn/wrapper/maven-wrapper.jar
