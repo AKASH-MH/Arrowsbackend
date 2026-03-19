@@ -1,0 +1,3 @@
+.\start-all.ps1   --Run the all application in same time
+
+.\start-all.ps1 -Docker   --Run the all application in same time with docker

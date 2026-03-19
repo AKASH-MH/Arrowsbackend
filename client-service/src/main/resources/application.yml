@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: client-service
+  profiles:
+    default: local
+  datasource:
+    url: ${CLIENT_DATASOURCE_URL:jdbc:postgresql://localhost:5432/jobportal}
+    username: ${CLIENT_DATASOURCE_USERNAME:postgres}
+    password: ${CLIENT_DATASOURCE_PASSWORD:postgres}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    show-sql: ${CLIENT_SHOW_SQL:false}
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8083
+
+tenant:
+  protected-paths:
+    - /api/org-units
+    - /api/clients

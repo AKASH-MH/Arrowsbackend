@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: auth-service
+  profiles:
+    default: local
+
+server:
+  port: 8081
+
+oauth2:
+  provider:
+    enabled: ${METHODHUB_OAUTH_ENABLED:true}
+    provider-name: ${METHODHUB_OAUTH_PROVIDER_NAME:MethodHub-OAuth2}
+    client-id: ${METHODHUB_OAUTH_CLIENT_ID:5614eb57-afb5-4a3f-ac59-2978a566ba00}
+    client-secret: ${METHODHUB_OAUTH_CLIENT_SECRET:0bbd790d-8b69-46d8-919f-10ef67453482}
+    authorization-endpoint: ${METHODHUB_OAUTH_AUTHORIZATION_ENDPOINT:https://login.microsoftonline.com/e0da204f-f64a-4a92-a74e-cac1eb35d0d6/oauth2/v2.0/authorize}
+    token-endpoint: ${METHODHUB_OAUTH_TOKEN_ENDPOINT:https://login.microsoftonline.com/e0da204f-f64a-4a92-a74e-cac1eb35d0d6/oauth2/v2.0/token}
+    redirect-uri: ${METHODHUB_OAUTH_REDIRECT_URI:http://localhost:3000/api/sso/callback}
+    scopes: ${METHODHUB_OAUTH_SCOPES:openid,profile,email}

@@ -1,0 +1,48 @@
+/.idea/
+/.vscode/
+/.mvn/wrapper/maven-wrapper.jar
+**/target/
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Maven
+target/
+.mvn/wrapper/maven-wrapper.jar
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Maven / Java build
+**/target/
+*.class
+*.jar
+*.war
+*.ear
+
+# Logs
+*.log
+logs/
+*.out
+*.err
+
+# Test / coverage
+coverage/
+jacoco.exec
+
+# Temp files
+*.tmp
+*.swp
+*~
+
+# Env / secrets (if used)
+.env
+.env.*
+application-local.properties
+*.idea
+.tenant-core/src/main/resources/tenant-bootstrap
+src\Arrows_Backend\database\schema-per-tenant/
+database/schema-per-tenant/
+tenant-core/src/main/resources/tenant-bootstrap/

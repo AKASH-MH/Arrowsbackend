@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: api-gateway
+  profiles:
+    default: local
+
+server:
+  port: 3000
+
+services:
+  auth:
+    base-url: http://localhost:8081
+  user:
+    base-url: http://localhost:8082
+  client:
+    base-url: http://localhost:8083

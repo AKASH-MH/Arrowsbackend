@@ -1,0 +1,65 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: jobportal
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d jobportal"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  auth-service:
+    build:
+      context: .
+      dockerfile: auth-service/Dockerfile
+    ports:
+      - "8081:8081"
+
+  user-service:
+    build:
+      context: .
+      dockerfile: user-service/Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8082:8082"
+    environment:
+      USER_DATASOURCE_URL: jdbc:postgresql://postgres:5432/jobportal
+      USER_DATASOURCE_USERNAME: postgres
+      USER_DATASOURCE_PASSWORD: postgres
+
+  client-service:
+    build:
+      context: .
+      dockerfile: client-service/Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8083:8083"
+    environment:
+      CLIENT_DATASOURCE_URL: jdbc:postgresql://postgres:5432/jobportal
+      CLIENT_DATASOURCE_USERNAME: postgres
+      CLIENT_DATASOURCE_PASSWORD: postgres
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: api-gateway/Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - auth-service
+      - user-service
+      - client-service
+
+volumes:
+  postgres-data:
